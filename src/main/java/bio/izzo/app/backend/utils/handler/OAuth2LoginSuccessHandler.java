@@ -38,11 +38,12 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
     String email = (String) attributes.get("email");
     Optional<User> userOp = userRepository.findByEmail(email);
     if (!userOp.isPresent())
-      throw new RuntimeException("User not exist in database");
+      throw new RuntimeException("User not exist in database"); 
     else {
       String token = jwtService.generateToken(userOp.get());
       Cookie jwtCookie = new Cookie("token", token);
-      jwtCookie.setDomain(applicationProperties.getBaseUrl());
+      String[] dom = applicationProperties.getBaseUrl().split("//");
+      jwtCookie.setDomain(dom[1]);
       jwtCookie.setSecure(true);
       response.addCookie(jwtCookie);
       response.sendRedirect(applicationProperties.getBaseUrl() + "/home");
