@@ -58,14 +58,34 @@ public class SecurityConfiguration {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests(customizer -> {
       customizer
-              .requestMatchers(antMatcher(HttpMethod.GET, "/health/**")).permitAll()
-              .requestMatchers(antMatcher(HttpMethod.POST, "/api/users")).permitAll()
-              .requestMatchers(antMatcher(HttpMethod.POST, "/api/auth/login")).permitAll()
-              .requestMatchers(antMatcher(HttpMethod.GET, "/api/auth/login/google")).permitAll()
-              .requestMatchers(antMatcher(HttpMethod.GET, "/api/auth/login/github")).permitAll()
-              .requestMatchers(antMatcher(HttpMethod.GET, "/api/users/verify-email")).permitAll()
-              .requestMatchers(antMatcher(HttpMethod.POST, "/api/users/forgot-password")).permitAll()
-              .requestMatchers(antMatcher(HttpMethod.PATCH, "/api/users/reset-password")).permitAll()
+              .requestMatchers(HttpMethod.GET, "/health/**").permitAll()
+
+              .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+              .requestMatchers(HttpMethod.GET, "/api/users").hasRole("ADMIN")
+
+              .requestMatchers(HttpMethod.GET, "/api/users/verify-email").permitAll()
+              .requestMatchers(HttpMethod.POST, "/api/users/forgot-password").permitAll()
+              .requestMatchers(HttpMethod.PATCH, "/api/users/reset-password").permitAll()
+
+              .requestMatchers(HttpMethod.GET, "/api/actualities").hasRole("ADMIN")
+              .requestMatchers(HttpMethod.POST, "/api/actualities").hasRole("ADMIN")
+              .requestMatchers(HttpMethod.PUT, "/api/actualities").hasRole("ADMIN")
+              .requestMatchers(HttpMethod.DELETE, "/api/actualities").hasRole("ADMIN")
+
+              .requestMatchers(HttpMethod.GET, "/api/activities").permitAll()
+              .requestMatchers(HttpMethod.POST, "/api/activities").hasRole("ADMIN")
+              .requestMatchers(HttpMethod.PUT, "/api/activities").hasRole("ADMIN")
+              .requestMatchers(HttpMethod.DELETE, "/api/activities").hasRole("ADMIN")
+
+              .requestMatchers(HttpMethod.GET, "/api/cuas").hasRole("ADMIN")
+              .requestMatchers(HttpMethod.POST, "/api/cuas").hasRole("ADMIN")
+              .requestMatchers(HttpMethod.PUT, "/api/cuas").hasRole("ADMIN")
+              .requestMatchers(HttpMethod.DELETE, "/api/cuas").hasRole("ADMIN")
+
+              .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+              .requestMatchers(HttpMethod.GET, "/api/auth/login/google").permitAll()
+              .requestMatchers(HttpMethod.GET, "/api/auth/login/github").permitAll()
+              
               .anyRequest().authenticated();
     });
     
