@@ -8,8 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
-@RequestMapping("/requestCUAs")
+@RequestMapping("/api/requestCUAs")
 public class RequestCUAController {
     @Autowired
     private RequestCUAService requestCUAService;

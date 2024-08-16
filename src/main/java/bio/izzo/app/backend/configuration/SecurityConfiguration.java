@@ -77,10 +77,22 @@ public class SecurityConfiguration {
               .requestMatchers(HttpMethod.PUT, "/api/activities").hasRole("ADMIN")
               .requestMatchers(HttpMethod.DELETE, "/api/activities").hasRole("ADMIN")
 
+              .requestMatchers(HttpMethod.GET, "/api/enregistrements").hasRole("USER")
+              .requestMatchers(HttpMethod.GET, "/api/enregistrements").hasRole("ADMIN")
+              .requestMatchers(HttpMethod.POST, "/api/enregistrements").hasRole("USER")
+              .requestMatchers(HttpMethod.PUT, "/api/enregistrements").hasRole("ADMIN")
+              .requestMatchers(HttpMethod.DELETE, "/api/enregistrements").hasRole("USER")
+              .requestMatchers(HttpMethod.DELETE, "/api/enregistrements").hasRole("ADMIN")
+
               .requestMatchers(HttpMethod.GET, "/api/cuas").hasRole("ADMIN")
               .requestMatchers(HttpMethod.POST, "/api/cuas").hasRole("ADMIN")
               .requestMatchers(HttpMethod.PUT, "/api/cuas").hasRole("ADMIN")
               .requestMatchers(HttpMethod.DELETE, "/api/cuas").hasRole("ADMIN")
+
+              .requestMatchers(HttpMethod.GET, "/api/requestCUAs").hasRole("ADMIN")
+              .requestMatchers(HttpMethod.POST, "/api/requestCUAs").hasRole("USER")
+              .requestMatchers(HttpMethod.PUT, "/api/requestCUAs").hasRole("ADMIN")
+              .requestMatchers(HttpMethod.DELETE, "/api/requestCUAs").hasRole("ADMIN")
 
               .requestMatchers(HttpMethod.GET, "/api/trash").permitAll()
               .requestMatchers(HttpMethod.POST, "/api/trash").hasRole("ADMIN")

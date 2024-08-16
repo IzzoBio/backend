@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/enregistrements")
-
+@RequestMapping("/api/enregistrements")
 public class EnregistrementController {
     @Autowired
     private EnregistrementService enregistrementService;
