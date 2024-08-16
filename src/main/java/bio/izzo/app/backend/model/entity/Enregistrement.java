@@ -1,16 +1,17 @@
 package bio.izzo.app.backend.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
-@Entity
-public class Enregistrement {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@NoArgsConstructor
+@AllArgsConstructor
+public class Enregistrement extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "id_actuality")
     private Actuality actuality;
