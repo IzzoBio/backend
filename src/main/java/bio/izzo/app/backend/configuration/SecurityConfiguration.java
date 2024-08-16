@@ -67,7 +67,7 @@ public class SecurityConfiguration {
               .requestMatchers(HttpMethod.POST, "/api/users/forgot-password").permitAll()
               .requestMatchers(HttpMethod.PATCH, "/api/users/reset-password").permitAll()
 
-              .requestMatchers(HttpMethod.GET, "/api/actualities").hasRole("ADMIN")
+              .requestMatchers(HttpMethod.GET, "/api/actualities").permitAll()
               .requestMatchers(HttpMethod.POST, "/api/actualities").hasRole("ADMIN")
               .requestMatchers(HttpMethod.PUT, "/api/actualities").hasRole("ADMIN")
               .requestMatchers(HttpMethod.DELETE, "/api/actualities").hasRole("ADMIN")
