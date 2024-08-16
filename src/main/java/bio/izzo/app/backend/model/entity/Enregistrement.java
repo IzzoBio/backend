@@ -15,5 +15,7 @@ public class Enregistrement extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "id_actuality")
     private Actuality actuality;
-
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 }
