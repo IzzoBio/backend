@@ -42,8 +42,10 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
     else {
       String token = jwtService.generateToken(userOp.get());
       Cookie jwtCookie = new Cookie("token", token);
+      jwtCookie.setDomain(applicationProperties.getBaseUrl());
+      jwtCookie.setSecure(true);
       response.addCookie(jwtCookie);
-      response.sendRedirect(applicationProperties.getBaseUrl() + "/profile");
+      response.sendRedirect(applicationProperties.getBaseUrl() + "/home");
     }
   }
 }
