@@ -11,6 +11,7 @@ import bio.izzo.app.backend.model.entity.User;
 import bio.izzo.app.backend.repository.UserRepository;
 import bio.izzo.app.backend.service.JwtService;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -27,20 +28,24 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
   @Autowired
   private ApplicationProperties applicationProperties;
 
-  @Override
-  public void onAuthenticationSuccess(HttpServletRequest request,
-      HttpServletResponse response,
-      Authentication authentication) throws IOException, ServletException {
-    OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
-    Map<String, Object> attributes = oAuth2User.getAttributes();
+    @Override
+    public void onAuthenticationSuccess(HttpServletRequest request,
+        HttpServletResponse response,
+        Authentication authentication) throws IOException, ServletException {
+      OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+      Map<String, Object> attributes = oAuth2User.getAttributes();
 
-    String email = (String) attributes.get("email");
-    Optional<User> userOp = userRepository.findByEmail(email);
-    if (!userOp.isPresent()) throw new RuntimeException("User not exist in database");
-    else {
-      String token = jwtService.generateToken(userOp.get());
-      response.setHeader("Authorization", "Bearer " + token);
-      response.sendRedirect(applicationProperties.getBaseUrl() + "/home");
+      String email = (String) attributes.get("email");
+      Optional<User> userOp = userRepository.findByEmail(email);
+      if (!userOp.isPresent()) throw new RuntimeException("User not exist in database");
+      else {
+        String token = jwtService.generateToken(userOp.get());
+        Cookie jwtCookie = new Cookie("token", token);
+        jwtCookie.setHttpOnly(true);
+        jwtCookie.setSecure(true);
+        jwtCookie.setPath("/");
+        response.addCookie(jwtCookie);
+        response.sendRedirect(applicationProperties.getBaseUrl() + "/home");
+      }
     }
-  }
 }
