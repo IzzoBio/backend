@@ -1,11 +1,12 @@
-package bio.izzo.app.backend.controller;
+package bio.izzo.app.backend.controller.health;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-
-public class Test {
+@RequestMapping("/health")
+public class Health {
     @GetMapping
     public String welcome() {
         return "U're server is already";

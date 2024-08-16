@@ -78,6 +78,13 @@ public class SecurityConfiguration {
 
     http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
+    http.exceptionHandling(customizer -> {
+      customizer.authenticationEntryPoint(
+          (request, response, authException) -> {
+            response.sendError(401, "Unauthorized");
+          });
+    });
+
     http.csrf(csrf -> csrf.disable())
         .sessionManagement(management -> management
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
