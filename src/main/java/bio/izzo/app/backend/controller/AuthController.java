@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import bio.izzo.app.backend.data.LoginRequest;
+import bio.izzo.app.backend.data.ResponseToken;
 import bio.izzo.app.backend.service.OAuth2Service;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -29,7 +30,7 @@ public class AuthController {
   public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) {
     String token = oauth2Service.login(loginRequest);
     if (token != null) {
-      return ResponseEntity.ok(token);
+      return ResponseEntity.ok(new ResponseToken(token));
     } else {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
     }
