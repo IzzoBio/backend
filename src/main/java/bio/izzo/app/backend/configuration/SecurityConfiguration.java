@@ -87,6 +87,11 @@ public class SecurityConfiguration {
               .requestMatchers(HttpMethod.PUT, "/api/trash").hasRole("ADMIN")
               .requestMatchers(HttpMethod.DELETE, "/api/trash").hasRole("ADMIN")
 
+              .requestMatchers(HttpMethod.POST, "/api/suggestion").permitAll()
+              .requestMatchers(HttpMethod.GET, "/api/suggestion").hasRole("ADMIN")
+              .requestMatchers(HttpMethod.PUT, "/api/suggestion").hasRole("ADMIN")
+              .requestMatchers(HttpMethod.DELETE, "/api/suggestion").hasRole("ADMIN")
+
               .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
               .requestMatchers(HttpMethod.GET, "/api/auth/login/google").permitAll()
               .requestMatchers(HttpMethod.GET, "/api/auth/login/github").permitAll()
