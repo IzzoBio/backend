@@ -2,11 +2,13 @@ package bio.izzo.app.backend.model.entity;
 
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.NoArgsConstructor;
 
-@Data
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestCUA extends AbstractEntity {
