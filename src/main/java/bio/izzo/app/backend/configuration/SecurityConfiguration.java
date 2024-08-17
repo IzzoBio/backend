@@ -90,7 +90,7 @@ public class SecurityConfiguration {
               .requestMatchers(HttpMethod.DELETE, "/api/cuas").hasRole("ADMIN")
 
               .requestMatchers(HttpMethod.GET, "/api/requestCUAs").hasRole("ADMIN")
-              .requestMatchers(HttpMethod.POST, "/api/requestCUAs").hasRole("USER")
+              .requestMatchers(HttpMethod.POST, "/api/requestCUAs").permitAll()
               .requestMatchers(HttpMethod.PUT, "/api/requestCUAs").hasRole("ADMIN")
               .requestMatchers(HttpMethod.DELETE, "/api/requestCUAs").hasRole("ADMIN")
 
