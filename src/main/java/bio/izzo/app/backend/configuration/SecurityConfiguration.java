@@ -127,9 +127,7 @@ public class SecurityConfiguration {
           });
     });
 
-    http.csrf(csrf -> csrf.disable())
-        .sessionManagement(management -> management
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+    http.csrf(csrf -> csrf.disable());
 
     return http.build();
   }
