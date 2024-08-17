@@ -14,6 +14,5 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Suggestion extends AbstractEntity {
-  private String type;
   private String content;
 }
